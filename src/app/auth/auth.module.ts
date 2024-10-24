@@ -10,6 +10,7 @@ import { AccountModule } from '../account/account.module';
 import { JwtStrategy } from './jwt.strategy';
 
 import * as dotenv from 'dotenv';
+import { LocalStrategy } from './local.strategy';
 
 dotenv.config({
   path: process.env.NODE_ENV ? `.env.${process.env.NODE_ENV}` : undefined,
@@ -27,7 +28,7 @@ const { JWT_SECRET, expiresIn } = process.env;
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService, JwtStrategy],
+  providers: [AuthService, JwtStrategy, LocalStrategy],
   exports: [AuthService],
 })
 export class AuthModule {}

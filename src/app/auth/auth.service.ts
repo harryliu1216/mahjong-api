@@ -11,7 +11,7 @@ dotenv.config({
   path: process.env.NODE_ENV ? `.env.${process.env.NODE_ENV}` : undefined,
 });
 
-const { SLAT, expiresIn } = process.env;
+const { expiresIn } = process.env;
 
 @Injectable()
 export class AuthService {
@@ -20,11 +20,11 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async accountLogin(username, password) {
+  async validateUser(username, password) {
     const result = await this.accountService.findOne(
       {
         username,
-        password: md5(password + SLAT),
+        password: md5(password),
         status: '1',
       },
       {
