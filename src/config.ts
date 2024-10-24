@@ -29,10 +29,6 @@ const CONFIG: {
   },
 };
 
-export const JWT_SECRET = 'AHS*&2k#LNSSS';
-export const expiresIn = '168h';
-export const SLAT = 'DSI*3a';
-
 export default {
   ...CONFIG[process.env.NODE_ENV || 'development'],
 };

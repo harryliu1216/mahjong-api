@@ -1,7 +1,13 @@
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { PassportStrategy } from '@nestjs/passport';
 import { Injectable } from '@nestjs/common';
-import { JWT_SECRET } from 'src/config';
+import * as dotenv from 'dotenv';
+
+dotenv.config({
+  path: process.env.NODE_ENV ? `.env.${process.env.NODE_ENV}` : undefined,
+});
+
+const { JWT_SECRET } = process.env;
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {

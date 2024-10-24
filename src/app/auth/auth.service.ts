@@ -5,7 +5,13 @@ import * as dayjs from 'dayjs';
 
 import BusinessException from '../../common/BusinessExcption';
 import { AccountService } from '../account/account.service';
-import { SLAT, expiresIn } from 'src/config';
+import * as dotenv from 'dotenv';
+
+dotenv.config({
+  path: process.env.NODE_ENV ? `.env.${process.env.NODE_ENV}` : undefined,
+});
+
+const { SLAT, expiresIn } = process.env;
 
 @Injectable()
 export class AuthService {

@@ -6,9 +6,16 @@ import { AuthService } from './auth.service';
 // import { LocalStrategy } from './local.strategy';
 // import { JwtStrategy } from './jwt.strategy';
 import { JwtModule } from '@nestjs/jwt';
-import { JWT_SECRET, expiresIn } from 'src/config';
 import { AccountModule } from '../account/account.module';
 import { JwtStrategy } from './jwt.strategy';
+
+import * as dotenv from 'dotenv';
+
+dotenv.config({
+  path: process.env.NODE_ENV ? `.env.${process.env.NODE_ENV}` : undefined,
+});
+
+const { JWT_SECRET, expiresIn } = process.env;
 
 @Global()
 @Module({
