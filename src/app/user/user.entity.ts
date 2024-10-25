@@ -12,6 +12,6 @@ export class UserEntity extends BaseEntityAbstract {
   @Column()
   nickname: string;
 
-  @Column()
+  @Column({ default: 0, unique: true })
   balance: number;
 }
