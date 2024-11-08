@@ -14,17 +14,7 @@ export class UserCreateDto {
   balance: number;
 }
 
-export class UserQueryDto extends BaseQueryDto {
-  @Condition({
-    function: (val) => Like(`%${val}%`),
-  })
-  nickname: string;
-
-  @IsOptional()
-  phone: string;
-}
-
-export class UserUpdateDto {
+export class UserUpdateDto extends UserCreateDto {
   @IsNotEmpty()
   id: number;
 
@@ -33,7 +23,14 @@ export class UserUpdateDto {
 
   @IsOptional()
   phone: string;
+}
+
+export class UserQueryDto extends BaseQueryDto {
+  @Condition({
+    function: (val) => Like(`%${val}%`),
+  })
+  nickname: string;
 
   @IsOptional()
-  balance: number;
+  phone: string;
 }

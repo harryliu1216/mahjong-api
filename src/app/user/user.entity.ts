@@ -6,12 +6,12 @@ export class UserEntity extends BaseEntityAbstract {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ unique: true })
   phone: string;
 
   @Column()
   nickname: string;
 
-  @Column({ default: 0, unique: true })
+  @Column({ default: 0 })
   balance: number;
 }

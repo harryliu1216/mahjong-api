@@ -1,16 +1,16 @@
-export class CustomResponseContent {
+export class CustomResponseContent<T> {
   constructor(
-    private data,
-    private message: string = 'ok',
-    private code: number = 0,
+    public data: T,
+    public msg: string = 'ok',
+    public code: number = 0,
   ) {}
 
-  getMessage() {
-    return this.message;
+  getmsg() {
+    return this.msg;
   }
 
-  setMessage(message) {
-    this.message = message;
+  setmsg(msg) {
+    this.msg = msg;
   }
 
   getData() {

@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Get,
+  Patch,
   Post,
   Query,
   Req,
@@ -9,13 +10,18 @@ import {
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { AuthGuard } from '@nestjs/passport';
-import type { UserCreateDto, UserQueryDto } from './user.dto';
+import { UserCreateDto, UserQueryDto, UserUpdateDto } from './user.dto';
 import BusinessException from 'src/common/BusinessExcption';
 
 @UseGuards(AuthGuard('jwt'))
 @Controller('/user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
+
+  @Get('/')
+  getUser(@Query() payload: UserQueryDto) {
+    return this.userService.findAll(payload);
+  }
 
   @Post('/')
   async createUser(@Body() payload: UserCreateDto) {
@@ -31,8 +37,8 @@ export class UserController {
     }
   }
 
-  @Get('/')
-  getUser(@Query() payload: UserQueryDto) {
-    return this.userService.findAll(payload);
+  @Patch('/')
+  async updateUser(@Body() payload: UserUpdateDto) {
+    return await this.userService.save(payload);
   }
 }

@@ -6,6 +6,7 @@ import {
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { CustomResponseContent } from './CustomResponseContent';
 
 export interface Response<T> {
   code: number;
@@ -36,6 +37,10 @@ export class ExceptionInterceptor<T>
 
     return next.handle().pipe(
       map((data) => {
+        if (data instanceof CustomResponseContent) {
+          return data;
+        }
+
         // 当data结构为{data, msg}时, 使用data中的msg
         if (data && data.data && typeof data.msg === 'string') {
           return { code: 0, data: data.data, msg: data.msg };
